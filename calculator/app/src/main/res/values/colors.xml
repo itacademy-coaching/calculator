@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/purpureBkg</color>
+    <color name="colorPrimaryDark">@color/purpureBkg</color>
+    <color name="colorAccent">@color/blueBkg</color>
+
+    <color name="defaultBkg">#FFFFFF</color>
+    <color name="purpureBkg">#c65454</color>
+    <color name="blueBkg">#361f81</color>
+    <color name="yellowBkg">#ffe600</color>
+    <color name="textBlack">#000000</color>
+    <color name="textWhite">#FFFFFF</color>
+</resources>
