@@ -1,19 +1,22 @@
 package mobi.asta.imagesinfo
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import mobi.asta.imagesinfo.ui.main.MainFragment
+import android.support.v7.app.AppCompatActivity
+import mobi.asta.imagesinfo.dummy.DummyContent
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, ItemFragment.newInstance(1))
                 .commitNow()
         }
     }
 
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+
+    }
 }
