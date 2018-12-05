@@ -1,13 +1,14 @@
-package mobi.asta.imagesinfo
+package mobi.asta.imagesinfo.ui.items
 
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import mobi.asta.imagesinfo.ItemFragment.OnListFragmentInteractionListener
+import com.squareup.picasso.Picasso
+import mobi.asta.imagesinfo.R
 import mobi.asta.imagesinfo.databinding.FragmentItemBinding
-import mobi.asta.imagesinfo.dummy.DummyContent.DummyItem
+import mobi.asta.imagesinfo.ui.items.ItemFragment.OnListFragmentInteractionListener
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -15,7 +16,7 @@ import mobi.asta.imagesinfo.dummy.DummyContent.DummyItem
  * TODO: Replace the implementation with code for your data type.
  */
 class MyItemRecyclerViewAdapter(
-    private val mValues: ArrayList<DummyItem>,
+    private val mValues: ArrayList<UserData>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -23,7 +24,7 @@ class MyItemRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.getTag(R.id.item) as DummyItem
+            val item = v.getTag(R.id.item) as UserData
             val position = v.getTag(R.id.position) as Int
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
@@ -43,6 +44,8 @@ class MyItemRecyclerViewAdapter(
         val item = mValues[position]
         holder.mView.viewModel = item
 
+        Picasso.get().load(item.avatar).into(holder.mView.avatar)
+
         with(holder.mView.root) {
             //            tag = item
             setTag(R.id.item, item)
@@ -52,6 +55,12 @@ class MyItemRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int = mValues.size
+
+    fun update(items: List<UserData>) {
+        mValues.clear()
+        mValues.addAll(items)
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(val mView: FragmentItemBinding) : RecyclerView.ViewHolder(mView.root)
 }

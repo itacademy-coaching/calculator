@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
     @SerializedName("data")
-    var `data`: List<Data> = listOf(),
+    var dataUser: List<Data> = listOf(),
     @SerializedName("page")
     var page: Int = 0,
     @SerializedName("per_page")

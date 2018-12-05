@@ -7,5 +7,5 @@ import retrofit2.http.GET
 
 interface ITAService {
     @GET("users")
-    fun listUsers(): Call<List<UserResponse>>
+    fun listUsers(): Call<UserResponse>
 }

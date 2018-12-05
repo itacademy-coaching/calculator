@@ -1,4 +1,4 @@
-package mobi.asta.imagesinfo
+package mobi.asta.imagesinfo.ui.items
 
 import android.content.Context
 import android.os.Bundle
@@ -9,21 +9,28 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import mobi.asta.imagesinfo.dummy.DummyContent
-import mobi.asta.imagesinfo.dummy.DummyContent.DummyItem
+import android.widget.Toast
+import mobi.asta.imagesinfo.R
 
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
  * [ItemFragment.OnListFragmentInteractionListener] interface.
  */
-class ItemFragment : Fragment() {
+class ItemFragment : Fragment(), ItemsInterface {
+    override fun loadFinished(items: List<UserData>) {
+        viewAdapter?.update(items)
+    }
 
-    // TODO: Customize parameters
+    override fun loadError(value: String) {
+        Toast.makeText(activity!!, value, Toast.LENGTH_LONG).show()
+    }
+
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
+
+    private var viewAdapter: MyItemRecyclerViewAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +46,23 @@ class ItemFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        // Set the adapter
+        // Set the viewAdapter
         if (view is RecyclerView) {
+            viewAdapter = MyItemRecyclerViewAdapter(arrayListOf(), listener)
             with(view) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = viewAdapter
             }
         }
+
+        val viewModel = ItemsViewModel()
+        viewModel.viewModel = this
+
+        viewModel.initLoad()
+
         return view
     }
 
@@ -79,7 +93,7 @@ class ItemFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: UserData?)
     }
 
     companion object {

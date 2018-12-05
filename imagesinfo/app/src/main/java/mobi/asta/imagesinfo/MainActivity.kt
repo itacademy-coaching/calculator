@@ -2,7 +2,8 @@ package mobi.asta.imagesinfo
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import mobi.asta.imagesinfo.dummy.DummyContent
+import mobi.asta.imagesinfo.ui.items.ItemFragment
+import mobi.asta.imagesinfo.ui.items.UserData
 
 class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
 
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
         }
     }
 
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+    override fun onListFragmentInteraction(item: UserData?) {
 
     }
 }
