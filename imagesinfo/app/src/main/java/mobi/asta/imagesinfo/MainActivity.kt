@@ -1,7 +1,9 @@
 package mobi.asta.imagesinfo
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import mobi.asta.imagesinfo.ui.DetailsActivity
 import mobi.asta.imagesinfo.ui.items.ItemFragment
 import mobi.asta.imagesinfo.ui.items.UserData
 
@@ -18,6 +20,8 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
     }
 
     override fun onListFragmentInteraction(item: UserData?) {
-
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra("item", item)
+        startActivity(intent)
     }
 }
